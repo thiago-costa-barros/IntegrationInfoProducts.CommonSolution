@@ -12,7 +12,10 @@ namespace CommonSolution.DTOs
         public bool Success => false;
         public int StatusCode { get; set; }
         public string ErrorType { get; set; } = string.Empty;
-        public string Message { get; set; } = string.Empty;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Message { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? Messages { get; set; }
         public string? TraceId { get; set; }
         public DateTime RequestTime { get; set; }
 

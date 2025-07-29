@@ -1,11 +1,12 @@
 ﻿using CommonSolution.DTOs;
+using CommonSolution.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.Extensions.Hosting;
 using System.Text.Json;
 
 namespace CommonSolution.Filters
@@ -26,26 +27,56 @@ namespace CommonSolution.Filters
         {
             var exception = context.Exception;
             var traceId = _httpContextAccessor.HttpContext?.TraceIdentifier;
+            var statusCode = StatusCodes.Status500InternalServerError;
+            var errorType = exception.GetType().Name;
+            string? singleMessage = null;
+            List<string>? multipleMessages = null;
 
-            var statusCode = exception switch
+            switch (exception)
             {
-                UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
-                ValidationException => StatusCodes.Status400BadRequest,
-                ArgumentNullException => StatusCodes.Status400BadRequest,
-                ArgumentException => StatusCodes.Status400BadRequest,
-                KeyNotFoundException => StatusCodes.Status404NotFound,
-                NotImplementedException => StatusCodes.Status501NotImplemented,
-                JsonException => StatusCodes.Status400BadRequest,
-                _ => StatusCodes.Status500InternalServerError
-            };
+                case FluentValidation.ValidationException fluentValidation:
+                    statusCode = StatusCodes.Status400BadRequest;
+                    errorType = "Validation Error";
+                    multipleMessages = fluentValidation.Errors.Select(e => e.ErrorMessage).ToList();
+                    break;
+
+
+                case ArgumentNullException:
+                case ValidationException:
+                case ArgumentException:
+                case JsonException:
+                    statusCode = StatusCodes.Status400BadRequest;
+                    singleMessage = exception.Message;
+                    break;
+
+                case KeyNotFoundException:
+                    statusCode = StatusCodes.Status404NotFound;
+                    singleMessage = exception.Message;
+                    break;
+
+                case UnauthorizedAccessException:
+                    statusCode = StatusCodes.Status401Unauthorized;
+                    singleMessage = ExceptionMessageHelper.UnauthorizedAccess();
+                    break;
+
+                case NotImplementedException:
+                    statusCode = StatusCodes.Status501NotImplemented;
+                    singleMessage = exception.Message;
+                    break;
+
+                default:
+                    singleMessage = ExceptionMessageHelper.UnexpectedError();
+                    break;
+            }
 
             var response = new ApiErrorResponse
             {
                 StatusCode = statusCode,
-                ErrorType = exception.GetType().Name,
-                Message = exception.Message,
-                RequestTime = DateTime.UtcNow,
+                ErrorType = errorType,
                 TraceId = traceId,
+                RequestTime = DateTime.UtcNow,
+                Message = singleMessage,
+                Messages = multipleMessages,
                 Details = _env.IsDevelopment() ? exception.StackTrace : null
             };
 
@@ -55,6 +86,8 @@ namespace CommonSolution.Filters
             {
                 StatusCode = statusCode
             };
+
+            context.ExceptionHandled = true;
         }
     }
 }

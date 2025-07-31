@@ -30,6 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Database\SQL\Scripts\StoredProcedures\" />
 	  <Folder Include="Validators\" />
 	</ItemGroup>
 

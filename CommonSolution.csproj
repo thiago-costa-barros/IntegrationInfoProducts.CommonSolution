@@ -15,6 +15,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resources\CoreSchemaMessage.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>CoreSchemaMessage.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\ExceptionMessages.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -23,6 +28,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Update="Resources\CoreSchemaMessage.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>CoreSchemaMessage.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\ExceptionMessages.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>

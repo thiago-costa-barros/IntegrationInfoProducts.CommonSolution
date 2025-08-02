@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace CommonSolution.Enums
 {
     public enum PublicEnum;
-    
-        public enum UserType
+
+    public enum UserType
     {
         [Display(ResourceType = typeof(UserMessages), Name = "ECM0000")]
         ApiMethod = 0,
@@ -43,17 +43,26 @@ namespace CommonSolution.Enums
         Blocked = 4
     }
 
-    public enum HotmartPurchaseEventType
+    public enum CompanyType
     {
-        PURCHASE_APPROVED = 1,
-        PURCHASE_CANCELED = 2,
-        PURCHASE_COMPLETE = 3,
-        PURCHASE_BILLET_PRINTED = 4,
-        PURCHASE_PROTEST = 5,
-        PURCHASE_REFUNDED = 6,
-        PURCHASE_CHARGEBACK = 7,
-        PURCHASE_EXPIRED = 8,
-        PURCHASE_DELAYED = 9
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0001")]
+        Individual = 1,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0002")]
+        LegalEntity = 2,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0003")]
+        ForeignPerson = 3
+    }
+
+    public enum CompanyStatus
+    {
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0004")]
+        Created = 0,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0005")]
+        Active = 1,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0006")]
+        Suspended = 2,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0007")]
+        Blocked = 3
     }
 }
 

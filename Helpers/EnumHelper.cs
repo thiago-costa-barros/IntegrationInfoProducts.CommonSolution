@@ -37,5 +37,11 @@ namespace CommonSolution.Helpers
 
             return attr.Name ?? value.ToString();
         }
+
+        public static bool TryParseEnum<TEnum>(string value, out TEnum result, bool ignoreCase = false)
+        where TEnum : struct, Enum
+        {
+            return Enum.TryParse(value, ignoreCase, out result) && Enum.IsDefined(typeof(TEnum), result);
+        }
     }
 }

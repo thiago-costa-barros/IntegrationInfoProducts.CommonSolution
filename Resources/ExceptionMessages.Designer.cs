@@ -88,6 +88,15 @@ namespace CommonSolution.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EXC0001 - Company não localizada..
+        /// </summary>
+        internal static string EXC0001 {
+            get {
+                return ResourceManager.GetString("EXC0001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro ao comunicar com serviço externo {0}. Mensagem: {1}.
         /// </summary>
         internal static string ExternalServiceError {

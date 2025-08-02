@@ -139,4 +139,7 @@
 	<data name="InvalidJsonPayload" xml:space="preserve">
     <value>O payload recebido não é um JSON válido.</value>
   </data>
+	<data name="EXC0001" xml:space="preserve">
+    <value>EXC0001 - Company não localizada.</value>
+  </data>
 </root>

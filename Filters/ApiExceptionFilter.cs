@@ -56,7 +56,7 @@ namespace CommonSolution.Filters
 
                 case UnauthorizedAccessException:
                     statusCode = StatusCodes.Status401Unauthorized;
-                    singleMessage = ExceptionMessageHelper.UnauthorizedAccess();
+                    singleMessage = exception.Message;
                     break;
 
                 case NotImplementedException:

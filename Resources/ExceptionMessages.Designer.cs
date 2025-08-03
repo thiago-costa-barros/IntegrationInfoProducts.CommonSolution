@@ -22,7 +22,7 @@ namespace CommonSolution.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ExceptionMessages {
+    public class ExceptionMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace CommonSolution.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CommonSolution.Resources.ExceptionMessages", typeof(ExceptionMessages).Assembly);
@@ -51,7 +51,7 @@ namespace CommonSolution.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,18 @@ namespace CommonSolution.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DatabaseException - Erro no banco de dados: {0}.
+        /// </summary>
+        public static string DatabaseException {
+            get {
+                return ResourceManager.GetString("DatabaseException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro ao deletar a entidade {0} com id {1}..
         /// </summary>
-        internal static string DeleteEntityError {
+        public static string DeleteEntityError {
             get {
                 return ResourceManager.GetString("DeleteEntityError", resourceCulture);
             }
@@ -72,7 +81,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Já existe um registro com {0} igual a {1}..
         /// </summary>
-        internal static string DuplicateEntry {
+        public static string DuplicateEntry {
             get {
                 return ResourceManager.GetString("DuplicateEntry", resourceCulture);
             }
@@ -81,7 +90,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Entidade {0} com identificador {1} não foi encontrada..
         /// </summary>
-        internal static string EntityNotFound {
+        public static string EntityNotFound {
             get {
                 return ResourceManager.GetString("EntityNotFound", resourceCulture);
             }
@@ -90,7 +99,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to EXC0001 - Company não localizada..
         /// </summary>
-        internal static string EXC0001 {
+        public static string EXC0001 {
             get {
                 return ResourceManager.GetString("EXC0001", resourceCulture);
             }
@@ -99,7 +108,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Erro ao comunicar com serviço externo {0}. Mensagem: {1}.
         /// </summary>
-        internal static string ExternalServiceError {
+        public static string ExternalServiceError {
             get {
                 return ResourceManager.GetString("ExternalServiceError", resourceCulture);
             }
@@ -108,7 +117,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to O serviço externo {0} está indisponível no momento..
         /// </summary>
-        internal static string ExternalServiceUnavailable {
+        public static string ExternalServiceUnavailable {
             get {
                 return ResourceManager.GetString("ExternalServiceUnavailable", resourceCulture);
             }
@@ -117,7 +126,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to As credenciais fornecidas são inválidas..
         /// </summary>
-        internal static string InvalidCredentials {
+        public static string InvalidCredentials {
             get {
                 return ResourceManager.GetString("InvalidCredentials", resourceCulture);
             }
@@ -126,7 +135,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to O valor {0} não é válido para o campo {1}..
         /// </summary>
-        internal static string InvalidEnumValue {
+        public static string InvalidEnumValue {
             get {
                 return ResourceManager.GetString("InvalidEnumValue", resourceCulture);
             }
@@ -135,7 +144,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to O campo {0} está em um formato inválido..
         /// </summary>
-        internal static string InvalidFieldFormat {
+        public static string InvalidFieldFormat {
             get {
                 return ResourceManager.GetString("InvalidFieldFormat", resourceCulture);
             }
@@ -144,7 +153,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to O payload recebido não é um JSON válido..
         /// </summary>
-        internal static string InvalidJsonPayload {
+        public static string InvalidJsonPayload {
             get {
                 return ResourceManager.GetString("InvalidJsonPayload", resourceCulture);
             }
@@ -153,7 +162,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to A assinatura do webhook recebido é inválida..
         /// </summary>
-        internal static string InvalidWebhookSignature {
+        public static string InvalidWebhookSignature {
             get {
                 return ResourceManager.GetString("InvalidWebhookSignature", resourceCulture);
             }
@@ -162,7 +171,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to O campo obrigatório {0} está ausente ou nulo..
         /// </summary>
-        internal static string RequiredFieldMissing {
+        public static string RequiredFieldMissing {
             get {
                 return ResourceManager.GetString("RequiredFieldMissing", resourceCulture);
             }
@@ -171,7 +180,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Erro ao salvar a entidade {0}. Detalhes: {1}.
         /// </summary>
-        internal static string SaveEntityError {
+        public static string SaveEntityError {
             get {
                 return ResourceManager.GetString("SaveEntityError", resourceCulture);
             }
@@ -180,7 +189,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Acesso não autorizado ao recurso requisitado..
         /// </summary>
-        internal static string UnauthorizedAccess {
+        public static string UnauthorizedAccess {
             get {
                 return ResourceManager.GetString("UnauthorizedAccess", resourceCulture);
             }
@@ -189,7 +198,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ocorreu um erro inesperado. Por favor, tente novamente..
         /// </summary>
-        internal static string UnexpectedError {
+        public static string UnexpectedError {
             get {
                 return ResourceManager.GetString("UnexpectedError", resourceCulture);
             }
@@ -198,7 +207,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Erro ao atualizar a entidade {0} com id {1}..
         /// </summary>
-        internal static string UpdateEntityError {
+        public static string UpdateEntityError {
             get {
                 return ResourceManager.GetString("UpdateEntityError", resourceCulture);
             }
@@ -207,7 +216,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Usuário com identificador {0} não foi encontrado..
         /// </summary>
-        internal static string UserNotFound {
+        public static string UserNotFound {
             get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
             }

@@ -22,7 +22,7 @@ namespace CommonSolution.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CoreSchemaMessage {
+    public class CoreSchemaMessage {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace CommonSolution.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CommonSolution.Resources.CoreSchemaMessage", typeof(CoreSchemaMessage).Assembly);
@@ -51,7 +51,7 @@ namespace CommonSolution.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pessoa Física..
         /// </summary>
-        internal static string CSM0001 {
+        public static string CSM0001 {
             get {
                 return ResourceManager.GetString("CSM0001", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pessoa Jurídica..
         /// </summary>
-        internal static string CSM0002 {
+        public static string CSM0002 {
             get {
                 return ResourceManager.GetString("CSM0002", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pessoa Estrangeira..
         /// </summary>
-        internal static string CSM0003 {
+        public static string CSM0003 {
             get {
                 return ResourceManager.GetString("CSM0003", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Criado..
         /// </summary>
-        internal static string CSM0004 {
+        public static string CSM0004 {
             get {
                 return ResourceManager.GetString("CSM0004", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ativo..
         /// </summary>
-        internal static string CSM0005 {
+        public static string CSM0005 {
             get {
                 return ResourceManager.GetString("CSM0005", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Suspenso..
         /// </summary>
-        internal static string CSM0006 {
+        public static string CSM0006 {
             get {
                 return ResourceManager.GetString("CSM0006", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace CommonSolution.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bloqueado..
         /// </summary>
-        internal static string CSM0007 {
+        public static string CSM0007 {
             get {
                 return ResourceManager.GetString("CSM0007", resourceCulture);
             }

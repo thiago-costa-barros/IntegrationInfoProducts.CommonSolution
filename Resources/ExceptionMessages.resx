@@ -139,6 +139,9 @@
 	<data name="InvalidJsonPayload" xml:space="preserve">
     <value>O payload recebido não é um JSON válido.</value>
   </data>
+	<data name="DatabaseException" xml:space="preserve">
+    <value>DatabaseException - Erro no banco de dados: {0}</value>
+  </data>
 	<data name="EXC0001" xml:space="preserve">
     <value>EXC0001 - Company não localizada.</value>
   </data>

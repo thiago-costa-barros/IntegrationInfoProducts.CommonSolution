@@ -38,7 +38,7 @@ namespace CommonSolution.Filters
             {
                 case FluentValidation.ValidationException fluentValidation:
                     statusCode = StatusCodes.Status400BadRequest;
-                    errorType = "Validation Error";
+                    errorType = "ValidationException";
                     multipleMessages = fluentValidation.Errors.Select(e => e.ErrorMessage).ToList();
                     break;
 

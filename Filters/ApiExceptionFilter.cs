@@ -1,9 +1,12 @@
 ﻿using CommonSolution.DTOs;
+using CommonSolution.Exceptions;
 using CommonSolution.Helpers;
+using CommonSolution.Resources;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
@@ -57,6 +60,13 @@ namespace CommonSolution.Filters
                 case UnauthorizedAccessException:
                     statusCode = StatusCodes.Status401Unauthorized;
                     singleMessage = exception.Message;
+                    break;
+
+                case DbUpdateException ex:
+                    statusCode = StatusCodes.Status422UnprocessableEntity;
+                    errorType = "ApplicationException";
+                    var detail = ex.InnerException?.Message ?? ex.Message;
+                    singleMessage = string.Format(ExceptionMessages.DatabaseException,detail);
                     break;
 
                 case NotImplementedException:

@@ -5,7 +5,8 @@
         public bool Success { get; set; }
         public int StatusCode { get; set; }
         public string? Message { get; set; }
-        public string? TraceId { get; set; }
+        public string? StackTraceId { get; set; }
+        public string? StackTrace { get; set; }
         public string? Route { get; set; }
         public string? Source { get; set; }
         public string? IpAddress { get; set; }

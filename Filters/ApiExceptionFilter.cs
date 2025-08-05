@@ -34,6 +34,8 @@ namespace CommonSolution.Filters
             string? singleMessage = null;
             List<string>? multipleMessages = null;
 
+            _httpContextAccessor.HttpContext?.Items.TryAdd("Exception", exception);
+
             switch (exception)
             {
                 case FluentValidation.ValidationException fluentValidation:
@@ -86,7 +88,6 @@ namespace CommonSolution.Filters
                 RequestTime = DateTime.UtcNow,
                 Message = singleMessage,
                 Messages = multipleMessages,
-                Details = _env.IsDevelopment() ? exception.StackTrace : null
             };
 
             _logger.LogError(exception, "Unhandled exception caught. TraceId: {TraceId}", traceId);

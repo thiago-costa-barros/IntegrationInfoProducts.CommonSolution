@@ -61,6 +61,10 @@ namespace CommonSolution.Middleware
 
             await _next(context);
 
+            Exception? exception = null;
+            if (context.Items.ContainsKey("Exception"))
+                exception = context.Items["Exception"] as Exception;
+
             context.Response.Body.Seek(0, SeekOrigin.Begin);
             var responseText = await new StreamReader(context.Response.Body).ReadToEndAsync();
             context.Response.Body.Seek(0, SeekOrigin.Begin);
@@ -72,7 +76,8 @@ namespace CommonSolution.Middleware
                 Success = isSuccess,
                 StatusCode = context.Response.StatusCode,
                 Message = TryExtractMessage(responseText),
-                TraceId = context.TraceIdentifier,
+                StackTraceId = context.TraceIdentifier,
+                StackTrace = exception?.ToString(),
                 Route = context.Request.Path,
                 HttpMethod = context.Request.Method,
                 RequestTime = requestTime,
@@ -88,6 +93,9 @@ namespace CommonSolution.Middleware
                 await handler.LogAsync(logEntry);
 
             await responseBody.CopyToAsync(originalBodyStream);
+
+            if (exception != null)
+                throw exception;
         }
 
         private static string? TryParse(string json)
@@ -100,7 +108,7 @@ namespace CommonSolution.Middleware
             catch
             {
                 return json; // já é uma string comum
-            }   
+            }
         }
 
         private static string? TryExtractMessage(string json)

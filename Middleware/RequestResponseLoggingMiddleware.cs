@@ -64,6 +64,10 @@ namespace CommonSolution.Middleware
             Exception? exception = null;
             if (context.Items.ContainsKey("Exception"))
                 exception = context.Items["Exception"] as Exception;
+            var companyId = context.Items.TryGetValue("CompanyId", out var companyIdObj)
+                && int.TryParse(companyIdObj?.ToString(), out var parsedCompanyId)
+                ? parsedCompanyId
+                : (int?)null;
 
             context.Response.Body.Seek(0, SeekOrigin.Begin);
             var responseText = await new StreamReader(context.Response.Body).ReadToEndAsync();
@@ -75,6 +79,7 @@ namespace CommonSolution.Middleware
             {
                 Success = isSuccess,
                 StatusCode = context.Response.StatusCode,
+                CompanyId = companyId,
                 Message = TryExtractMessage(responseText),
                 StackTraceId = context.TraceIdentifier,
                 StackTrace = exception?.ToString(),

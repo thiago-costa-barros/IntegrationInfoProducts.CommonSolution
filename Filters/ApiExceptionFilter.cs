@@ -31,8 +31,7 @@ namespace CommonSolution.Filters
             var traceId = _httpContextAccessor.HttpContext?.TraceIdentifier;
             var statusCode = StatusCodes.Status500InternalServerError;
             var errorType = exception.GetType().Name;
-            string? singleMessage = null;
-            List<string>? multipleMessages = null;
+            var apiMessage = new ApiMessage();
 
             _httpContextAccessor.HttpContext?.Items.TryAdd("Exception", exception);
 
@@ -41,7 +40,8 @@ namespace CommonSolution.Filters
                 case FluentValidation.ValidationException fluentValidation:
                     statusCode = StatusCodes.Status400BadRequest;
                     errorType = "ValidationException";
-                    multipleMessages = fluentValidation.Errors.Select(e => e.ErrorMessage).ToList();
+                    apiMessage.Value = string.Format(ExceptionMessages.FluentValidationException);
+                    apiMessage.Details = fluentValidation.Errors.Select(e => e.ErrorMessage).ToList();
                     break;
 
 
@@ -50,33 +50,33 @@ namespace CommonSolution.Filters
                 case ArgumentException:
                 case JsonException:
                     statusCode = StatusCodes.Status400BadRequest;
-                    singleMessage = exception.Message;
+                    apiMessage.Value = exception.Message;
                     break;
 
                 case KeyNotFoundException:
                     statusCode = StatusCodes.Status404NotFound;
-                    singleMessage = exception.Message;
+                    apiMessage.Value = exception.Message;
                     break;
 
                 case UnauthorizedAccessException:
                     statusCode = StatusCodes.Status401Unauthorized;
-                    singleMessage = exception.Message;
+                    apiMessage.Value = exception.Message;
                     break;
 
                 case DbUpdateException ex:
                     statusCode = StatusCodes.Status422UnprocessableEntity;
                     errorType = "ApplicationException";
                     var detail = ex.InnerException?.Message ?? ex.Message;
-                    singleMessage = string.Format(ExceptionMessages.DatabaseException,detail);
+                    apiMessage.Value = string.Format(ExceptionMessages.DatabaseException,detail);
                     break;
 
                 case NotImplementedException:
                     statusCode = StatusCodes.Status501NotImplemented;
-                    singleMessage = exception.Message;
+                    apiMessage.Value = exception.Message;
                     break;
 
                 default:
-                    singleMessage = ExceptionMessageHelper.UnexpectedError();
+                    apiMessage.Value = ExceptionMessageHelper.UnexpectedError();
                     break;
             }
 
@@ -86,8 +86,7 @@ namespace CommonSolution.Filters
                 ErrorType = errorType,
                 TraceId = traceId,
                 RequestTime = DateTime.UtcNow,
-                Message = singleMessage,
-                Messages = multipleMessages,
+                Message = apiMessage,
             };
 
             _logger.LogError(exception, "Unhandled exception caught. TraceId: {TraceId}", traceId);

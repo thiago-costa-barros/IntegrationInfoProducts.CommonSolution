@@ -124,6 +124,15 @@ namespace CommonSolution.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ValidationException - Erro de validação dos campos informados..
+        /// </summary>
+        public static string FluentValidationException {
+            get {
+                return ResourceManager.GetString("FluentValidationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to As credenciais fornecidas são inválidas..
         /// </summary>
         public static string InvalidCredentials {

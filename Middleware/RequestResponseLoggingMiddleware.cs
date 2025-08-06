@@ -116,8 +116,14 @@ namespace CommonSolution.Middleware
             try
             {
                 var doc = JsonDocument.Parse(json);
-                if (doc.RootElement.TryGetProperty("message", out var message))
-                    return message.GetString();
+                if (doc.RootElement.TryGetProperty("message", out var messageElement))
+                {
+                    if (messageElement.ValueKind == JsonValueKind.String)
+                        return messageElement.GetString();
+
+                    if (messageElement.TryGetProperty("value", out var valueProp))
+                        return valueProp.GetString();
+                }
             }
             catch { }
             return null;

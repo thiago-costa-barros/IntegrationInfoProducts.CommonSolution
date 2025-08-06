@@ -142,6 +142,9 @@
 	<data name="DatabaseException" xml:space="preserve">
     <value>DatabaseException - Erro no banco de dados: {0}</value>
   </data>
+	<data name="FluentValidationException" xml:space="preserve">
+    <value>ValidationException - Erro de validação dos campos informados.</value>
+  </data>
 	<data name="EXC0001" xml:space="preserve">
     <value>EXC0001 - Company não localizada.</value>
   </data>

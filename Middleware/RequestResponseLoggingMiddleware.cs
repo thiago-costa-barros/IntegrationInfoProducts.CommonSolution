@@ -95,7 +95,17 @@ namespace CommonSolution.Middleware
             };
 
             foreach (var handler in _logHandlers)
-                await handler.LogAsync(logEntry);
+            {
+                try
+                {
+                    await handler.LogAsync(logEntry);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Erro ao enviar log para handler {Handler}", handler.GetType().Name);
+                    // Pode armazenar fallback em arquivo, ou apenas ignorar
+                }
+            }
 
             await responseBody.CopyToAsync(originalBodyStream);
 

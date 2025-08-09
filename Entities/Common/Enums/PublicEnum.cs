@@ -1,7 +1,7 @@
 ﻿using CommonSolution.Resources;
 using System.ComponentModel.DataAnnotations;
 
-namespace CommonSolution.Enums
+namespace CommonSolution.Entities.Common.Enums
 {
     public enum PublicEnum;
 
@@ -63,6 +63,25 @@ namespace CommonSolution.Enums
         Suspended = 2,
         [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0007")]
         Blocked = 3
+    }
+    public enum ExternalWebhookReceiverSourceType
+    {
+        Hotmart = 1,
+        Udemy = 2,
+    }
+
+    public enum ExternalWebhookReceiverStatus
+    {
+        Created = 0,
+        Pending = 1,
+        Proccessed = 2,
+        Error = 3,
+    }
+
+    public enum ExternalAuthenticationType
+    {
+        Hotmart = 1,
+        Udemy = 2,
     }
 }
 

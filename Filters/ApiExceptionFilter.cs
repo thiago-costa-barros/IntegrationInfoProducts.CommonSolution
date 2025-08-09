@@ -1,4 +1,4 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Abstractions.DTOs;
 using CommonSolution.Helpers;
 using CommonSolution.Resources;
 using Microsoft.AspNetCore.Hosting;

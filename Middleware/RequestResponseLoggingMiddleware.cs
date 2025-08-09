@@ -1,4 +1,4 @@
-﻿using CommonSolution.Entities;
+﻿using CommonSolution.Entities.Common;
 using CommonSolution.Entities.Logging;
 using CommonSolution.Interfaces.Logging;
 using Microsoft.AspNetCore.Http;

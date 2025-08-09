@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace CommonSolution.DTOs
+namespace CommonSolution.Abstractions.DTOs
 {
     public class ApiErrorResponse
     {

@@ -1,6 +1,6 @@
 ﻿using CommonSolution.Interfaces;
 
-namespace CommonSolution.Entities
+namespace CommonSolution.Entities.Common
 {
     public class AuditableEntity : IAuditableEntity
     {

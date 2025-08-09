@@ -1,4 +1,5 @@
-﻿using CommonSolution.Enums;
+﻿using CommonSolution.Entities.Common;
+using CommonSolution.Entities.Common.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CommonSolution.Entities.CoreSchema

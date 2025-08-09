@@ -1,4 +1,4 @@
-﻿using CommonSolution.DTOs;
+﻿using CommonSolution.Abstractions.DTOs;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-
-namespace CommonSolution.Helpers
+﻿namespace CommonSolution.Helpers
 {
     public static class MessageHelper
     {

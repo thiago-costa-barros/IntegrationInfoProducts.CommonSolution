@@ -51,6 +51,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Abstractions\Interfaces\" />
+	  <Folder Include="Abstractions\Services\" />
 	  <Folder Include="Database\SQL\Scripts\StoredProcedures\" />
 	  <Folder Include="Validators\" />
 	</ItemGroup>

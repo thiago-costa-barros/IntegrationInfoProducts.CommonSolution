@@ -43,6 +43,15 @@ namespace CommonSolution.Entities.Common.Enums
         Blocked = 4
     }
 
+    public enum PersonType
+    {
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0008")]
+        Individual = 1,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0009")]
+        LegalEntity = 2,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0010")]
+        ForeignPerson = 3
+    }
     public enum CompanyType
     {
         [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0001")]
@@ -54,6 +63,17 @@ namespace CommonSolution.Entities.Common.Enums
     }
 
     public enum CompanyStatus
+    {
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0004")]
+        Created = 0,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0005")]
+        Active = 1,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0006")]
+        Suspended = 2,
+        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0007")]
+        Blocked = 3
+    }
+    public enum CompanyBranchStatus
     {
         [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0004")]
         Created = 0,

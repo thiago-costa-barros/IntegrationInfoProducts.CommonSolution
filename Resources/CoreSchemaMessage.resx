@@ -119,4 +119,10 @@
 	<data name="CSM0007" xml:space="preserve">
 		<value>Bloqueado.</value>
 		</data>
+	<data name="CSM0008" xml:space="preserve">
+		<value>InfoProduto.</value>
+		</data>
+	<data name="CSM0009" xml:space="preserve">
+		<value>Produto Físico.</value>
+		</data>
 </root>

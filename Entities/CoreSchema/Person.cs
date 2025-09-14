@@ -8,9 +8,9 @@ namespace CommonSolution.Entities.CoreSchema
     public class Person: AuditableEntity
     {
         public int PersonId { get; set; }
-        public string? Email { get; set; }
         public string? Name { get; set; }
         public string? TaxNumber { get; set; }
         public PersonType Type { get; set; }
+        public PersonStatus Status { get; set; }
     }
 }

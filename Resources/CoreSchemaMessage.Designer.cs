@@ -122,5 +122,23 @@ namespace CommonSolution.Resources {
                 return ResourceManager.GetString("CSM0007", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InfoProduto..
+        /// </summary>
+        public static string CSM0011 {
+            get {
+                return ResourceManager.GetString("CSM0011", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Produto Físico..
+        /// </summary>
+        public static string CSM0012 {
+            get {
+                return ResourceManager.GetString("CSM0012", resourceCulture);
+            }
+        }
     }
 }

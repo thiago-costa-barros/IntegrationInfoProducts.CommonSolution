@@ -1,19 +1,7 @@
---This script creates common schemas for the database tc_portfolio.
-CREATE DATABASE tc_portfolio;
-GO
-USE tc_portfolio;
-GO
-CREATE SCHEMA CoreSchema;
-GO
+CREATE SCHEMA "CoreSchema";
 
-CREATE SCHEMA IntegrationSchema;
-GO
+CREATE SCHEMA "IntegrationSchema";
 
-CREATE SCHEMA AccountSchema;
-GO
+CREATE SCHEMA "AccountSchema";
 
-CREATE SCHEMA UserSchema;
-GO
-
-CREATE SCHEMA BillingSchema;
-GO
+CREATE SCHEMA "BillingSchema";

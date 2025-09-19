@@ -106,6 +106,15 @@ namespace CommonSolution.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EXC0002 - BusinessUnit não localizada..
+        /// </summary>
+        public static string EXC0002 {
+            get {
+                return ResourceManager.GetString("EXC0002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro ao comunicar com serviço externo {0}. Mensagem: {1}.
         /// </summary>
         public static string ExternalServiceError {

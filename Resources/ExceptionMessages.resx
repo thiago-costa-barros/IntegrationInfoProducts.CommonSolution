@@ -148,4 +148,7 @@
 	<data name="EXC0001" xml:space="preserve">
     <value>EXC0001 - Company não localizada.</value>
   </data>
+	<data name="EXC0002" xml:space="preserve">
+    <value>EXC0002 - BusinessUnit não localizada.</value>
+  </data>
 </root>

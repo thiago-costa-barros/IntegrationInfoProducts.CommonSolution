@@ -14,8 +14,6 @@ namespace CommonSolution.Entities.IntegrationSchema
         public string? AuthKey { get; set; }
 
         public int CompanyId { get; set; }
-
-        [ForeignKey(nameof(CompanyId))]
-        public required Company Company { get; set; }
+        public int BusinessUnitId { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace CommonSolution.Entities.IntegrationSchema
         public ExternalWebhookReceiverSourceType SourceType { get; set; }
         public ExternalWebhookReceiverStatus Status { get; set; }
         public int CompanyId { get; set; }
+        public int BusinessUnitId { get; set; }
         public string? ExternalIdentifier { get; set; }
         public string? Payload { get; set; }
     }

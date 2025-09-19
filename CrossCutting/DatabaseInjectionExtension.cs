@@ -12,18 +12,22 @@ namespace CommonSolution.CrossCutting
     {
         public static IServiceCollection AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddPostgresConfig<ApplicationDbContext>(configuration);
+            services.AddPostgresConfig<ApplicationDbContext>();
             services.AddMongoConfig();
             services.AddRedisConfig();
 
             return services;
         }
 
-        public static IServiceCollection AddPostgresConfig<TDbContext>(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPostgresConfig<TDbContext>(this IServiceCollection services)
             where TDbContext : DbContext
         {
-            var options = configuration.GetSection("Postgres").Get<ConnectionStringOptions>();
-            services.AddDbContext<TDbContext>(opt => opt.UseNpgsql(options.DefaultConnectionString));
+            services.AddDbContext<TDbContext>((sp, opt) =>
+            {
+                var options = sp.GetRequiredService<IOptions<ConnectionStringOptions>>().Value;
+                opt.UseNpgsql(options.PostgresConnection);
+            });
+
             return services;
         }
 
@@ -32,14 +36,7 @@ namespace CommonSolution.CrossCutting
             services.AddSingleton<IMongoClient>(sp =>
             {
                 var options = sp.GetRequiredService<IOptions<ConnectionStringOptions>>().Value;
-                return new MongoClient(options.DefaultConnectionString);
-            });
-
-            services.AddScoped<IMongoDatabase>(sp =>
-            {
-                var options = sp.GetRequiredService<IOptions<ConnectionStringOptions>>().Value;
-                var client = sp.GetRequiredService<IMongoClient>();
-                return client.GetDatabase(options.DefaultConnectionString);
+                return new MongoClient(options.MongoConnection);
             });
 
             return services;
@@ -50,7 +47,7 @@ namespace CommonSolution.CrossCutting
             services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
                 var options = sp.GetRequiredService<IOptions<ConnectionStringOptions>>().Value;
-                return ConnectionMultiplexer.Connect(options.DefaultConnectionString);
+                return ConnectionMultiplexer.Connect(options.RedisConnection);
             });
 
             return services;

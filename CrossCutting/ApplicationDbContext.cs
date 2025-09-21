@@ -21,7 +21,9 @@ namespace CommonSolution.CrossCutting
             {
                 var entityTypes = entitiesAssembly
                     .GetTypes()
-                    .Where(t => t.IsClass && !t.IsAbstract);
+                    .Where(t => t.IsClass
+                            && !t.IsAbstract
+                            && t.GetCustomAttribute<TableAttribute>() != null);
 
                 foreach (var type in entityTypes)
                 {

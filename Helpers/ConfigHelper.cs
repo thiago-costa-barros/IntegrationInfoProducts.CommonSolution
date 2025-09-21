@@ -7,14 +7,16 @@ namespace CommonSolution.Helpers
 {
     public static class ConfigHelper
     {
-        public const string ConnectionStringsSection = "ConnectionStrings";
         public static IServiceCollection AddCommonOptions(this IServiceCollection services, IConfiguration configuration)
         {
+            services.Configure<AppSettings>(
+                configuration.GetSection("AppSettings"));
+
             services.Configure<ConsoleLoggingOptions>(
                 configuration.GetSection("ConsoleLoggingOptions"));
 
             services.Configure<ConnectionStringOptions>(
-                configuration.GetSection(ConnectionStringsSection));
+                configuration.GetSection("ConnectionStrings"));
 
             services.Configure<DefaultUserService>(
                 configuration.GetSection("DefaultUser"));

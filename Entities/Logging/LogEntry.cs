@@ -17,5 +17,6 @@
         public DateTime ResponseTime { get; set; }
         public TimeSpan Duration { get; set; }
         public int? CompanyId { get; set; }
+        public int? BusinessUnitId { get; set; }
     }
 }

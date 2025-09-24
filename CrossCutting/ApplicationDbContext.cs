@@ -1,5 +1,7 @@
 ﻿using CommonSolution.Entities;
 using Microsoft.EntityFrameworkCore;
+using SharpCompress.Common;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 
@@ -28,14 +30,19 @@ namespace CommonSolution.CrossCutting
                 foreach (var type in entityTypes)
                 {
                     var tableAttr = type.GetCustomAttribute<TableAttribute>();
+                    var entity = modelBuilder.Entity(type);
 
                     if (tableAttr != null)
                     {
-                        modelBuilder.Entity(type).ToTable(tableAttr.Name, tableAttr.Schema);
+                        entity.ToTable(tableAttr.Name, tableAttr.Schema);
+
+                        var hasKey = type.GetProperties().Any(p => p.GetCustomAttribute<KeyAttribute>() != null);
+                        if (!hasKey)
+                            entity.HasNoKey();
                     }
                     else
                     {
-                        modelBuilder.Entity(type).ToTable(type.Name, "CoreSchema");
+                        entity.ToTable(type.Name, "CoreSchema");
                     }
                 }
             }

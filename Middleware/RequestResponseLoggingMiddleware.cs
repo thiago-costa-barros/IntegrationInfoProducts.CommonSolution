@@ -68,6 +68,10 @@ namespace CommonSolution.Middleware
                 && int.TryParse(companyIdObj?.ToString(), out var parsedCompanyId)
                 ? parsedCompanyId
                 : (int?)null;
+            var businessUnitId = context.Items.TryGetValue("BusinessUnitId", out var businessUnitIdObj)
+                && int.TryParse(businessUnitIdObj?.ToString(), out var parsedBusinessUnitId)
+                ? parsedBusinessUnitId
+                : (int?)null;
 
             context.Response.Body.Seek(0, SeekOrigin.Begin);
             var responseText = await new StreamReader(context.Response.Body).ReadToEndAsync();
@@ -80,6 +84,7 @@ namespace CommonSolution.Middleware
                 Success = isSuccess,
                 StatusCode = context.Response.StatusCode,
                 CompanyId = companyId,
+                BusinessUnitId = businessUnitId,
                 Message = TryExtractMessage(responseText),
                 StackTraceId = context.TraceIdentifier,
                 StackTrace = exception?.ToString(),

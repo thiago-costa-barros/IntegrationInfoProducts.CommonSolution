@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CommonSolution.Entities.CoreSchema
 {
-    public class Product
-    {
         [Table("Product", Schema = "CoreSchema")]
-        public class CompanyBranch : AuditableEntity
+        public class Product : AuditableEntity
         {
             public int ProductId { get; set; }
             public string? Name { get; set; }
@@ -17,4 +15,3 @@ namespace CommonSolution.Entities.CoreSchema
             public int BusinessUnitId { get; set; }
         }
     }
-}

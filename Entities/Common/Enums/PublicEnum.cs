@@ -84,17 +84,6 @@ namespace CommonSolution.Entities.Common.Enums
         [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0007")]
         Blocked = 3
     }
-    public enum CompanyBranchStatus
-    {
-        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0004")]
-        Created = 0,
-        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0005")]
-        Active = 1,
-        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0006")]
-        Suspended = 2,
-        [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0007")]
-        Blocked = 3
-    }
 
     public enum BusinessUnitStatus
     {

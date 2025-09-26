@@ -35,10 +35,6 @@ namespace CommonSolution.CrossCutting
                     if (tableAttr != null)
                     {
                         entity.ToTable(tableAttr.Name, tableAttr.Schema);
-
-                        var hasKey = type.GetProperties().Any(p => p.GetCustomAttribute<KeyAttribute>() != null);
-                        if (!hasKey)
-                            entity.HasNoKey();
                     }
                     else
                     {

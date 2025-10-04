@@ -24,7 +24,7 @@ namespace CommonSolution.Handlers
             {
                 Directory.CreateDirectory(_xmlFilePath);
 
-                var fileName = $"{_xmlDefaultFileName}{DateTime.Now:yyyy-MM-dd_HH}.xml";
+                var fileName = $"{_xmlDefaultFileName}_{DateTime.Now:yyyy-MM-dd_HH}.xml";
                 var fullPath = Path.Combine(_xmlFilePath, fileName);
 
                 var json = System.Text.Json.JsonSerializer.Serialize(logEntry);

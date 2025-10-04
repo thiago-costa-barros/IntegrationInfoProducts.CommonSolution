@@ -1,5 +1,6 @@
 ﻿using CommonSolution.Entities.Common;
 using CommonSolution.Entities.Logging;
+using CommonSolution.Handlers;
 using CommonSolution.Interfaces.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -8,36 +9,34 @@ using System.Text.Json;
 
 namespace CommonSolution.Middleware
 {
-    public class RequestResponseLoggingMiddleware
+    public class ApiLoggingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<RequestResponseLoggingMiddleware> _logger;
+        private readonly ILogger<ApiLoggingMiddleware> _logger;
         private readonly IEnumerable<ILogHandler> _logHandlers;
         private readonly DefaultUserService _defaultUser;
+        private readonly IOptions<LoggingProvidersOptions> _loggingProviders;
 
-        public RequestResponseLoggingMiddleware(
+        public ApiLoggingMiddleware(
             RequestDelegate next,
-            ILogger<RequestResponseLoggingMiddleware> logger,
+            ILogger<ApiLoggingMiddleware> logger,
             IEnumerable<ILogHandler> logHandlers,
-            IOptions<DefaultUserService> defaultUser)
+            IOptions<DefaultUserService> defaultUser,
+            IOptions<LoggingProvidersOptions> loggingProviders)
         {
             _next = next;
             _logger = logger;
             _logHandlers = logHandlers;
             _defaultUser = defaultUser.Value;
+            _loggingProviders = loggingProviders;
         }
 
         public async Task Invoke(HttpContext context)
         {
             // Ignorar requisições do Swagger e arquivos estáticos
-            var path = context.Request.Path.Value;
+            bool ignoredRequest = IgnoredRequests(context);
 
-            if (path != null && (
-                path.StartsWith("/swagger") ||
-                path.EndsWith(".js") ||
-                path.EndsWith(".css") ||
-                path.EndsWith(".json") ||
-                path.Contains("favicon.ico")))
+            if (ignoredRequest)
             {
                 await _next(context);
                 return;
@@ -64,14 +63,8 @@ namespace CommonSolution.Middleware
             Exception? exception = null;
             if (context.Items.ContainsKey("Exception"))
                 exception = context.Items["Exception"] as Exception;
-            var companyId = context.Items.TryGetValue("CompanyId", out var companyIdObj)
-                && int.TryParse(companyIdObj?.ToString(), out var parsedCompanyId)
-                ? parsedCompanyId
-                : (int?)null;
-            var businessUnitId = context.Items.TryGetValue("BusinessUnitId", out var businessUnitIdObj)
-                && int.TryParse(businessUnitIdObj?.ToString(), out var parsedBusinessUnitId)
-                ? parsedBusinessUnitId
-                : (int?)null;
+
+            AuditableEntityLog auditableEntityLog = MappingAuditableEntitiesLogs(context);
 
             context.Response.Body.Seek(0, SeekOrigin.Begin);
             var responseText = await new StreamReader(context.Response.Body).ReadToEndAsync();
@@ -83,8 +76,8 @@ namespace CommonSolution.Middleware
             {
                 Success = isSuccess,
                 StatusCode = context.Response.StatusCode,
-                CompanyId = companyId,
-                BusinessUnitId = businessUnitId,
+                CompanyId = auditableEntityLog.CompanyId,
+                BusinessUnitId = auditableEntityLog.BusinessUnitId,
                 Message = TryExtractMessage(responseText),
                 StackTraceId = context.TraceIdentifier,
                 StackTrace = exception?.ToString(),
@@ -101,6 +94,16 @@ namespace CommonSolution.Middleware
 
             foreach (var handler in _logHandlers)
             {
+                var shouldLog = handler switch
+                {
+                    XmlFileLogHandler => (!isSuccess && context.Response.StatusCode >= 500),
+
+                    _ => _loggingProviders.Value.EnabledProviders.Contains(handler.ProviderName)
+                };
+
+                if (!shouldLog)
+                    continue;
+
                 try
                 {
                     await handler.LogAsync(logEntry);
@@ -108,9 +111,20 @@ namespace CommonSolution.Middleware
                 catch (Exception ex)
                 {
                     _logger.LogWarning(ex, "Erro ao enviar log para handler {Handler}", handler.GetType().Name);
-                    // Pode armazenar fallback em arquivo, ou apenas ignorar
+
+                    try
+                    {
+                        var xmlHandler = _logHandlers.FirstOrDefault(h => h is XmlFileLogHandler);
+                        if (xmlHandler != null)
+                            await xmlHandler.LogAsync(logEntry);
+                    }
+                    catch (Exception xmlEx)
+                    {
+                        _logger.LogError(xmlEx, "Falha ao registrar log em XML de fallback");
+                    }
                 }
             }
+
 
             await responseBody.CopyToAsync(originalBodyStream);
 
@@ -118,6 +132,22 @@ namespace CommonSolution.Middleware
                 throw exception;
         }
 
+        private static bool IgnoredRequests(HttpContext context)
+        {
+            var path = context.Request.Path.Value;
+
+            if (path != null && (
+                path.StartsWith("/swagger") ||
+                path.EndsWith(".js") ||
+                path.EndsWith(".css") ||
+                path.EndsWith(".json") ||
+                path.Contains("favicon.ico")))
+            {
+                return true;
+            }
+
+            return false;
+        }
         private static string? TryParse(string json)
         {
             try
@@ -147,6 +177,26 @@ namespace CommonSolution.Middleware
             }
             catch { }
             return null;
+        }
+
+        private static AuditableEntityLog MappingAuditableEntitiesLogs(HttpContext context)
+        {
+            var companyId = context.Items.TryGetValue("CompanyId", out var companyIdObj)
+                && int.TryParse(companyIdObj?.ToString(), out var parsedCompanyId)
+                ? parsedCompanyId
+                : (int?)null;
+
+            var businessUnitId = context.Items.TryGetValue("BusinessUnitId", out var businessUnitIdObj)
+                && int.TryParse(businessUnitIdObj?.ToString(), out var parsedBusinessUnitId)
+                ? parsedBusinessUnitId
+                : (int?)null;
+
+            AuditableEntityLog result = new AuditableEntityLog
+            {
+                CompanyId = companyId ?? 0,
+                BusinessUnitId = businessUnitId ?? 0
+            };
+            return result;
         }
     }
 }

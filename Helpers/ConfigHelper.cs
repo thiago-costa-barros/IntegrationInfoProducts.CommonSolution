@@ -12,17 +12,20 @@ namespace CommonSolution.Helpers
             services.Configure<AppSettings>(
                 configuration.GetSection("AppSettings"));
 
-            services.Configure<ConsoleLoggingOptions>(
-                configuration.GetSection("ConsoleLoggingOptions"));
-
             services.Configure<ConnectionStringOptions>(
                 configuration.GetSection("ConnectionStrings"));
 
             services.Configure<DefaultUserService>(
                 configuration.GetSection("DefaultUser"));
 
+            services.Configure<ConsoleLoggingOptions>(
+                configuration.GetSection("ConsoleLoggingOptions"));
+
             services.Configure<LoggingOptions>(
                 configuration.GetSection("LoggingOptions"));
+
+            services.Configure<LoggingProvidersOptions>(
+                configuration.GetSection("LoggingProvidersOptions"));
 
             return services;
         }

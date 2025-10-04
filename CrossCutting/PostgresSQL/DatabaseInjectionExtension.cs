@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using StackExchange.Redis;
 
-namespace CommonSolution.CrossCutting
+namespace CommonSolution.CrossCutting.PostgresSQL
 {
     public static class DatabaseInjectionExtension
     {

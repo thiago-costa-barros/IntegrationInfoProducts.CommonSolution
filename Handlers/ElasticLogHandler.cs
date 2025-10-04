@@ -22,6 +22,8 @@ namespace CommonSolution.Handlers
             _client = new ElasticClient(settings);
         }
 
+        public string ProviderName => "Elastic";
+
         public async Task LogAsync(LogEntry logEntry)
         {
             await _client.IndexDocumentAsync(logEntry);

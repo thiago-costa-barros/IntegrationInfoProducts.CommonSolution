@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace CommonSolution.Database.Interfaces
+﻿namespace CommonSolution.Database.Interfaces
 {
     public interface IUnitOfWork
     {

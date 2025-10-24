@@ -114,6 +114,17 @@ namespace CommonSolution.Entities.Common.Enums
         [Display(ResourceType = typeof(CoreSchemaMessage), Name = "CSM0007")]
         Blocked = 3
     }
+    public enum ProductSourceType
+    {
+        MainApi = 0,
+        Hotmart = 1,
+        Udemy = 2,
+    }
+    public enum ProductOfferCouponStatus
+    {
+        Active = 0,
+        Expired = 1,
+    }
     public enum ExternalWebhookReceiverSourceType
     {
         Hotmart = 1,

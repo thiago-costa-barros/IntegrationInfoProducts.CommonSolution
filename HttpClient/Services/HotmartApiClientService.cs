@@ -76,14 +76,75 @@ namespace CommonSolution.HttpClient.Services
             }
         }
 
-        public Task<ApiResponse<HotmartApiResponse<HotmartProductApiResponse>?>> GetProductById(HotmartApiCredentials credentials, string paramId, CancellationToken cancellationToken = default)
+        public async Task<ApiResponse<HotmartApiResponse<HotmartProductApiResponse>?>> GetProductById(HotmartApiCredentials credentials, string paramId, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            HotmartApiCredentialsResponse? tokenResponse = await GetAccessToken(credentials, cancellationToken);
+            if (tokenResponse is null || string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
+                throw new InvalidOperationException("Não foi possível obter o token de acesso para a API Hotmart.");
+
+            string url = $"{credentials.ApiBaseUrl}/products/api/v1/products?id={paramId}";
+            var headers = new Dictionary<string, string>
+            {
+                ["Authorization"] = $"Bearer {tokenResponse.AccessToken}"
+            };
+            try
+            {
+                ApiResponse<HotmartApiResponse<HotmartProductApiResponse>?>? httpClientResponse = await _httpClientService.MethodGet<object, ApiResponse<HotmartApiResponse<HotmartProductApiResponse>?>>(url, null, headers, cancellationToken);
+                return httpClientResponse!;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Erro ao consultar produtos na API Hotmart: {ex.Message}", ex);
+            }
         }
 
-        public Task<ApiResponse<HotmartApiResponse<HotmartProductApiResponse>?>> GetProductOfferByCode(HotmartApiCredentials credentials, string paramId, string paramCode, CancellationToken cancellationToken = default)
+        public async Task<ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>> GetProductOfferByCode(HotmartApiCredentials credentials, string paramId, string paramCode, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            HotmartApiCredentialsResponse? tokenResponse = await GetAccessToken(credentials, cancellationToken);
+            if (tokenResponse is null || string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
+                throw new InvalidOperationException("Não foi possível obter o token de acesso para a API Hotmart.");
+
+            string url = $"{credentials.ApiBaseUrl}/products/api/v1/products/{paramId}/offers";
+            var headers = new Dictionary<string, string>
+            {
+                ["Authorization"] = $"Bearer {tokenResponse.AccessToken}"
+            };
+            try
+            {
+                ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>? httpClientResponse = await _httpClientService.MethodGet<object, ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>>(url, null, headers, cancellationToken);
+                if (httpClientResponse?.Data?.Items is not null)
+                {
+                    FilterItems(httpClientResponse.Data, offer => offer.Code == paramCode);
+                }
+
+                return httpClientResponse!;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Erro ao consultar produtos na API Hotmart: {ex.Message}", ex);
+            }
+        }
+        public async Task<ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>> GetAllProductOffers(HotmartApiCredentials credentials, string paramId, CancellationToken cancellationToken = default)
+        {
+            HotmartApiCredentialsResponse? tokenResponse = await GetAccessToken(credentials, cancellationToken);
+            if (tokenResponse is null || string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
+                throw new InvalidOperationException("Não foi possível obter o token de acesso para a API Hotmart.");
+
+            string url = $"{credentials.ApiBaseUrl}/products/api/v1/products/{paramId}/offers";
+            var headers = new Dictionary<string, string>
+            {
+                ["Authorization"] = $"Bearer {tokenResponse.AccessToken}"
+            };
+            try
+            {
+                ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>? httpClientResponse = await _httpClientService.MethodGet<object, ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>>(url, null, headers, cancellationToken);
+                
+                return httpClientResponse!;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Erro ao consultar produtos na API Hotmart: {ex.Message}", ex);
+            }
         }
 
         public Task<ApiResponse<HotmartApiResponse<HotmartCouponApiResponse>?>> GetCouponsByProductId(HotmartApiCredentials credentials, string paramId, CancellationToken cancellationToken = default)
@@ -106,5 +167,11 @@ namespace CommonSolution.HttpClient.Services
                 }
                 : null;
         }
+        private static void FilterItems<T>(HotmartApiResponse<T>? response, Func<T, bool> predicate)
+        {
+            if (response?.Items is null) return;
+            response.Items = response.Items.Where(predicate).ToList();
+        }
+
     }
 }

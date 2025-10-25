@@ -7,7 +7,8 @@ namespace CommonSolution.HttpClient.Interfaces
     {
         Task<HotmartApiCredentialsResponse?> GetAccessToken(HotmartApiCredentials credentials, CancellationToken cancellationToken = default);
         Task<ApiResponse<HotmartApiResponse<HotmartProductApiResponse>?>> GetProductById(HotmartApiCredentials credentials, string paramId, CancellationToken cancellationToken = default);
-        Task<ApiResponse<HotmartApiResponse<HotmartProductApiResponse>?>> GetProductOfferByCode(HotmartApiCredentials credentials, string paramId, string paramCode, CancellationToken cancellationToken = default);
+        Task<ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>> GetProductOfferByCode(HotmartApiCredentials credentials, string paramId, string paramCode, CancellationToken cancellationToken = default);
+        Task<ApiResponse<HotmartApiResponse<HotmartProductOfferApiResponse>?>> GetAllProductOffers(HotmartApiCredentials credentials, string paramId, CancellationToken cancellationToken = default);
         Task<ApiResponse<HotmartApiResponse<HotmartCouponApiResponse>?>> GetCouponsByProductId(HotmartApiCredentials credentials, string paramId, CancellationToken cancellationToken = default);
     }
 }

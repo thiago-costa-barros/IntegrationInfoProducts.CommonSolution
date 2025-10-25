@@ -144,5 +144,26 @@ namespace CommonSolution.Entities.Common.Enums
         Hotmart = 1,
         Udemy = 2,
     }
+    public enum OperationStatus
+    {
+        Created = 0,
+        Pending = 1,
+        Registred = 2,
+        Approved = 3,
+        Completed = 4,
+        Cancelled = 5,
+        Refunded = 6,
+        AwaitingConfirmation = 7,
+        Error = 8
+    }
+    public enum OperationType
+    {
+        Pix = 0,
+        Billet = 1,
+        HybridBillet = 2,
+        BankTransfer = 3,
+        PurchaseCard = 4,
+        DigitalWallet = 5
+    }
 }
 

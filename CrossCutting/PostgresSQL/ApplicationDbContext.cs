@@ -1,4 +1,4 @@
-﻿using CommonSolution.Entities;
+﻿using CommonSolution.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;

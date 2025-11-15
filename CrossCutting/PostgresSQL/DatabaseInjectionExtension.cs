@@ -1,4 +1,4 @@
-﻿using CommonSolution.Entities.Common;
+﻿using CommonSolution.Domain.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

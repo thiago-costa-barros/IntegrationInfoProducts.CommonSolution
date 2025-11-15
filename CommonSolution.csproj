@@ -21,17 +21,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\CoreSchemaMessage.Designer.cs">
+	  <Compile Update="Domain\Resources\CoreSchemaMessage.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>CoreSchemaMessage.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="Resources\ExceptionMessages.Designer.cs">
+	  <Compile Update="Domain\Resources\ExceptionMessages.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>ExceptionMessages.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="Resources\ExternalWebhookReceiverMessages.Designer.cs">
+	  <Compile Update="Domain\Resources\ExternalWebhookReceiverMessages.Designer.cs">
 	    <DependentUpon>ExternalWebhookReceiverMessages.resx</DependentUpon>
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -39,26 +39,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resources\CoreSchemaMessage.resx">
+	  <EmbeddedResource Update="Domain\Resources\CoreSchemaMessage.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>CoreSchemaMessage.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Resources\ExceptionMessages.resx">
+	  <EmbeddedResource Update="Domain\Resources\ExceptionMessages.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Resources\ExternalWebhookReceiverMessages.resx">
+	  <EmbeddedResource Update="Domain\Resources\ExternalWebhookReceiverMessages.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>ExternalWebhookReceiverMessages.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Abstractions\Interfaces\" />
-	  <Folder Include="Abstractions\Services\" />
+	  <Folder Include="Domain\Abstractions\Interfaces\" />
+	  <Folder Include="Domain\Abstractions\Services\" />
 	  <Folder Include="CrossCutting\MongoDb\" />
-	  <Folder Include="Database\SQL\Scripts\StoredProcedures\" />
-	  <Folder Include="Validators\" />
+	  <Folder Include="CrossCutting\Database\SQL\Scripts\StoredProcedures\" />
 	</ItemGroup>
 
 </Project>

@@ -1,0 +1,32 @@
+﻿using CommonSolution.Domain.Entities.Logging;
+using CommonSolution.Domain.Interfaces.Logging;
+using Microsoft.Extensions.Options;
+using Nest;
+
+namespace CommonSolution.Utils.Handlers
+{
+    public class ElasticLogHandler : ILogHandler
+    {
+        private readonly IElasticClient _client;
+        private readonly string _index;
+
+        public ElasticLogHandler(IOptions<LoggingOptions> options)
+        {
+            var config = options.Value;
+
+            _index = config.IndexName;
+
+            var settings = new ConnectionSettings(new Uri(config.Url))
+                .DefaultIndex(_index);
+
+            _client = new ElasticClient(settings);
+        }
+
+        public string ProviderName => "Elastic";
+
+        public async Task LogAsync(LogEntry logEntry)
+        {
+            await _client.IndexDocumentAsync(logEntry);
+        }
+    }
+}

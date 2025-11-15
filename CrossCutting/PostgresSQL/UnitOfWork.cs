@@ -1,4 +1,4 @@
-﻿using CommonSolution.Database.Interfaces;
+﻿using CommonSolution.CrossCutting.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
